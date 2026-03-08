@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
@@ -88,7 +88,7 @@
             max-height: 0; overflow: hidden;
             transition: max-height 0.4s cubic-bezier(.4,0,.2,1), padding 0.3s; padding: 0;
         }
-        .sidebar-section-content.open { max-height: 600px; padding: 14px 0 6px; }
+        .sidebar-section-content.open { max-height: 900px; padding: 14px 0 6px; }
         .sidebar-section-content.open.sidebar-reviews-content { max-height: 70vh; }
         .sidebar-reviews-scroll {
             max-height: 55vh; overflow-y: auto; padding-right: 6px;
@@ -156,6 +156,46 @@
         .sidebar-info-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; color: #bbb; font-size: 14px; }
         .sidebar-info-row i { color: #d32f2f; min-width: 20px; text-align: center; margin-top: 3px; }
         .sidebar-info-row strong { color: #eee; }
+        .sidebar-direct-block {
+            padding: 12px 14px 14px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin-top: 4px;
+        }
+        .sidebar-direct-label {
+            font-size: 12px; font-weight: 700; color: #d32f2f;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 7px;
+        }
+        .sidebar-map-link { text-decoration: none; display: block; }
+        .sidebar-map-link:hover .sidebar-info-row { color: #fff; }
+        .sidebar-map-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 10px; padding: 6px 14px; border-radius: 8px;
+            background: rgba(211,47,47,0.15); color: #ff5252;
+            font-size: 12px; font-weight: 600; border: 1px solid rgba(211,47,47,0.25);
+            transition: background 0.2s;
+        }
+        .sidebar-map-link:hover .sidebar-map-btn { background: rgba(211,47,47,0.3); }
+        .sidebar-despre-text { font-size: 13px; color: #999; line-height: 1.65; margin: 0; }
+        .sidebar-despre-text strong { color: #eee; }
+        .sidebar-service-tag {
+            display: inline-block; background: rgba(211,47,47,0.12);
+            color: #ff7070; border: 1px solid rgba(211,47,47,0.2);
+            padding: 2px 9px; border-radius: 6px; font-size: 11px;
+            font-weight: 600; margin: 3px 2px 0;
+        }
+        .sidebar-contact-block { padding: 10px 14px; }
+        .sidebar-contact-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #ccc; font-size: 14px; text-decoration: none;
+            transition: color 0.2s;
+        }
+        .sidebar-contact-item:last-child { border-bottom: none; }
+        .sidebar-contact-item:hover { color: #fff; }
+        .sidebar-contact-item i { color: #d32f2f; font-size: 18px; min-width: 22px; text-align: center; }
+        .sidebar-contact-item span { font-weight: 500; }
+        .sidebar-contact-item small { display: block; color: #666; font-size: 11px; margin-top: 1px; }
         .sidebar-price-tag {
             display: inline-block; background: rgba(211,47,47,0.15);
             color: #ff5252; padding: 4px 12px; border-radius: 6px;
@@ -657,12 +697,17 @@
     <div class="sidebar-section">
         <div class="sidebar-section-title" onclick="toggleAccordion(this)"><span><i class="fas fa-users" style="margin-right:6px;"></i> Despre Noi</span> <i class="fas fa-chevron-down accordion-arrow"></i></div>
         <div class="sidebar-section-content">
-            <div class="sidebar-despre-item" onclick="toggleSubText(this)"><i class="fas fa-id-badge item-icon"></i><span>Cine suntem</span><i class="fas fa-chevron-down sub-arrow"></i></div>
-            <div class="sidebar-sub-text">AJ Performance Tuning este un atelier specializat in remaparea ECU si optimizarea performantelor auto. Punem accent pe calitate, personalizare si transparenta. Fiecare masina este tratata individual, cu soft scris pe banca de teste, nu fisiere generice. Pasiunea pentru motoare si tehnologie ne defineste.</div>
-            <div class="sidebar-despre-item" onclick="toggleSubText(this)"><i class="fas fa-tag item-icon"></i><span>Tarife</span><i class="fas fa-chevron-down sub-arrow"></i></div>
-            <div class="sidebar-sub-text">Pretul pentru o remapare Stage 1 porneste de la <span class="sidebar-price-tag">150 EUR</span>, in functie de marca, modelul si tipul motorului. Pretul include diagnoza pre-tuning, scrierea softului personalizat si testarea finala. Pentru detalii exacte, contacteaza-ne cu datele masinii tale.</div>
-            <div class="sidebar-despre-item" onclick="toggleSubText(this)"><i class="fas fa-clock item-icon"></i><span>Program de lucru</span><i class="fas fa-chevron-down sub-arrow"></i></div>
-            <div class="sidebar-sub-text">
+
+            <!-- Cine suntem -->
+            <div class="sidebar-direct-block">
+                <div class="sidebar-direct-label"><i class="fas fa-id-badge"></i> Cine suntem</div>
+                <p class="sidebar-despre-text">AJ Performance Tuning este un atelier specializat in <strong>remaparea ECU</strong> si optimizarea performantelor auto. Fiecare masina este tratata individual, cu soft scris pe banca de teste — nu fisiere generice. Punem accent pe calitate, personalizare si transparenta.</p>
+                <p class="sidebar-despre-text" style="margin-top:6px;">Servicii oferite: <span class="sidebar-service-tag">Remaparе Stage 1</span> <span class="sidebar-service-tag">Diagnoza ECU</span> <span class="sidebar-service-tag">Optimizare consum</span></p>
+            </div>
+
+            <!-- Program de lucru -->
+            <div class="sidebar-direct-block">
+                <div class="sidebar-direct-label"><i class="fas fa-clock"></i> Program de lucru</div>
                 <table class="schedule-table" id="scheduleTable">
                     <tr><td>Luni</td><td>09:00 - 18:00</td></tr>
                     <tr><td>Marti</td><td>09:00 - 18:00</td></tr>
@@ -672,10 +717,27 @@
                     <tr><td>Sambata</td><td>10:00 - 14:00</td></tr>
                     <tr><td>Duminica</td><td>Inchis</td></tr>
                 </table>
-                <p class="schedule-note"><i class="fas fa-info-circle"></i> Programul poate varia. Pentru urgente sau programari in afara orelor, contacteaza-ne direct.</p>
+                <p class="schedule-note"><i class="fas fa-info-circle"></i> Programul poate varia. Pentru urgente, contacteaza-ne direct.</p>
             </div>
-            <div class="sidebar-despre-item" onclick="toggleSubText(this)"><i class="fas fa-map-marker-alt item-icon"></i><span>Locatie</span><i class="fas fa-chevron-down sub-arrow"></i></div>
-            <div class="sidebar-sub-text"><div class="sidebar-info-row"><i class="fas fa-map-pin"></i><div><strong>Strada Dunarii nr. 1</strong><br>Ineu, jud. Arad, Romania</div></div></div>
+
+            <!-- Locatie -->
+            <div class="sidebar-direct-block">
+                <div class="sidebar-direct-label"><i class="fas fa-map-marker-alt"></i> Locatie</div>
+                <a href="https://www.google.com/maps/search/Strada+Dunarii+nr.1+Ineu+Arad" target="_blank" rel="noopener" class="sidebar-map-link">
+                    <div class="sidebar-info-row">
+                        <i class="fas fa-map-pin"></i>
+                        <div>
+                            <strong>Strada Dunarii nr. 1</strong><br>
+                            Ineu, jud. Arad<br>
+                            <span style="color:#888;font-size:12px;">Cod postal: 315300</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-map-btn"><i class="fas fa-external-link-alt"></i> Deschide in Google Maps</div>
+                </a>
+            </div>
+
+
+
         </div>
     </div>
     <div class="sidebar-section">
