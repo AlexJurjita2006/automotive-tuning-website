@@ -21,11 +21,11 @@ function toggleAccordion(titleEl) {
     // Close all sections first
     document.querySelectorAll('.sidebar-section-title').forEach(function(t) {
         t.classList.remove('open');
-        t.nextElementSibling.classList.remove('open');
+        if (t.nextElementSibling) t.nextElementSibling.classList.remove('open');
     });
     
     // Toggle clicked one
-    if (!isOpen) {
+    if (!isOpen && content) {
         titleEl.classList.add('open');
         content.classList.add('open');
     }
@@ -401,4 +401,3 @@ function updateSidebarAvg() {
     badge.style.display = 'inline-flex';
     badge.innerHTML = '<i class="fas fa-star" style="font-size:9px;"></i> ' + avg + '/5';
 }
-
