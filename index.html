@@ -216,7 +216,7 @@
         .sidebar::-webkit-scrollbar-track { background: transparent; }
         .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
-        /* ========== HERO SECTION ========== */
+        /* ========== HERO SECTION (fără imagine) ========== */
         .hero {
             position: relative; width: 100%; min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
@@ -224,11 +224,11 @@
         }
         .hero-bg {
             position: absolute; inset: 0; z-index: 0;
-            background: url('https://i.pinimg.com/236x/f7/78/3d/f7783d071753f894b8dd805adeb72d68.jpg?nii=t') center/cover no-repeat;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
         }
         .hero-bg::after {
             content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(10,10,10,1) 100%);
+            background: rgba(0,0,0,0.4);
         }
         .hero-content {
             position: relative; z-index: 1; text-align: center;
