@@ -1,0 +1,388 @@
+/* ===== Variabile ===== */
+:root {
+  --primary: #00e0ff;
+  --primary-dark: #0099cc;
+  --accent: #ff3a00;
+  --bg-dark: #0a0c10;
+  --bg-card: rgba(20, 22, 27, 0.8);
+  --text-light: #f0f0f0;
+  --text-gray: #b0b3b8;
+}
+
+/* ===== Container global ===== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ===== HERO ===== */
+.home-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=2064&auto=format') no-repeat center center/cover;
+  background-attachment: fixed;
+}
+
+.home-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+.home-hero-container {
+  position: relative;
+  z-index: 2;
+}
+
+.home-hero-content {
+  max-width: 700px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.home-hero-badge {
+  display: inline-block;
+  background: rgba(0, 224, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.home-hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  background: linear-gradient(135deg, #fff, var(--primary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.home-hero-title span {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.home-hero-description {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  margin: 1.5rem 0;
+  line-height: 1.6;
+}
+
+.home-hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.8rem 2rem;
+  font-weight: 700;
+  border-radius: 40px;
+  transition: 0.3s;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(95deg, var(--primary-dark), var(--primary));
+  color: #0a0c10;
+  box-shadow: 0 0 12px var(--primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--primary);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 224, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+.home-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--primary);
+  border-radius: 25px;
+}
+
+.home-scroll-indicator span {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 4px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  animation: scrollAnim 1.5s infinite;
+}
+
+@keyframes scrollAnim {
+  0% { opacity: 1; top: 8px; }
+  80% { opacity: 0; top: 30px; }
+  100% { opacity: 0; top: 30px; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== FORMULAR ESTIMARE ===== */
+.home-estimate {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #050608, #0a0c10);
+}
+
+.home-estimate-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border-radius: 32px;
+  padding: 2.5rem;
+  border: 1px solid rgba(0, 224, 255, 0.2);
+  box-shadow: 0 20px 35px -15px black;
+}
+
+.home-estimate-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+}
+
+.home-estimate-title span {
+  color: var(--primary);
+}
+
+.home-estimate-subtitle {
+  text-align: center;
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+}
+
+.home-estimate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 180px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.form-group select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(0, 224, 255, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+.btn-estimate {
+  background: linear-gradient(95deg, var(--accent), #ff6a00);
+  border: none;
+  padding: 1rem;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-estimate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 58, 0, 0.4);
+}
+
+/* ===== STATISTICI ===== */
+.home-stats {
+  padding: 3rem 0;
+  background: #050608;
+  border-top: 1px solid rgba(0,224,255,0.1);
+  border-bottom: 1px solid rgba(0,224,255,0.1);
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+/* ===== CARDURI CUNOȘTINȚE ===== */
+.home-knowledge {
+  padding: 5rem 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-tag {
+  display: inline-block;
+  background: rgba(0,224,255,0.1);
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 2.2rem;
+  color: var(--text-light);
+}
+
+.section-header h2 span {
+  color: var(--primary);
+}
+
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.knowledge-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 24px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid rgba(0,224,255,0.1);
+}
+
+.knowledge-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 25px -10px rgba(0,224,255,0.3);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.knowledge-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: var(--primary);
+}
+
+.knowledge-card p {
+  color: var(--text-gray);
+  line-height: 1.5;
+}
+
+/* ===== HARTĂ ===== */
+.home-map {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #0a0c10, #050608);
+}
+
+.map-content {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.map-content h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.map-content p {
+  color: var(--text-gray);
+  margin-bottom: 1.5rem;
+}
+
+.map-placeholder {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px black;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .home-hero-title {
+    font-size: 2.5rem;
+  }
+  .home-hero-description {
+    font-size: 1rem;
+  }
+  .home-estimate-card {
+    padding: 1.5rem;
+  }
+  .stats-grid {
+    justify-content: center;
+  }
+  .container {
+    padding: 0 1.5rem;
+  }
+}

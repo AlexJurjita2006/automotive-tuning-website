@@ -1,0 +1,132 @@
+.site-footer {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 50px 0 25px;
+  margin-top: 60px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: relative;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Brand - doar text */
+.footer-brand p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+/* Link-uri */
+.footer-links {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+/* Linie animată la hover */
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #d32f2f, #ff8a8a);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  text-shadow: 0 0 6px rgba(211, 47, 47, 0.5);
+}
+
+/* Social media - în colțul din dreapta */
+.footer-social {
+  display: flex;
+  gap: 20px;
+  width: auto;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0;
+}
+
+.footer-social a {
+  font-size: 28px;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  color: #ccc;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-social a:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Culori originale brand */
+.footer-social a:first-child {
+  color: #e4405f; /* Instagram */
+}
+
+.footer-social a:last-child {
+  color: #0077b5; /* LinkedIn */
+}
+
+/* Footer bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #777;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive: pe mobil, iconițele se vor centra (nu mai stau în dreapta) */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+    margin-top: 8px;
+  }
+}
