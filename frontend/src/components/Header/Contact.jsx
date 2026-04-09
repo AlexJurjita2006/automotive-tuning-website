@@ -57,7 +57,7 @@ const Contact = () => {
               <span className="contact-icon">📍</span>
               <div>
                 <strong>Locație</strong>
-                <span>Str. Performanței nr. 42, București</span>
+                <span>Str. Dunării nr.1 , Ineu, Arad</span>
               </div>
             </div>
           </div>

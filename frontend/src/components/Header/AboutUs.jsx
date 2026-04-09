@@ -101,15 +101,16 @@ const AboutUs = () => {
             <div className="about-map">
               <h3>📍 Unde ne găsești</h3>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.123456789!2d26.1025!3d44.4268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDTCsDI1JzM2LjUiTiAyNsKwMDYnMTUuMCJF!5e0!3m2!1sro!2sro!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d343.7661889534399!2d21.83318380583969!3d46.4263125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4745f75a99bce933%3A0x43fde3f2cfce879e!2sStr.%20Iuliu%20Maniu%201%2C%20315300%20Ineu!5e0!3m2!1sro!2sro!4v1775729663069!5m2!1sro!2sro"
                 width="100%"
                 height="200"
                 style={{ border: 0, borderRadius: '16px' }}
                 allowFullScreen=""
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
                 title="Locație AJ Performance"
               ></iframe>
-              <p className="map-address">Str. Dunării nr. 1, Ineu, Arad</p>
+              <p className="map-address">Str. Dunării nr.1 , Ineu, Arad</p>
             </div>
           </div>
         </div>
