@@ -1,9 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase as supabaseClient } from '../supabaseClient';
 
-// Înlocuiește cu URL-ul și cheia ta publică din Supabase
-const supabaseUrl = 'https://lommheijitxadhghqqww.supabase.co';
-const supabaseKey = 'sb_publishable_odFfWDfVVhB9YO3Iuc6ASw_4stJyL0U';
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = supabaseClient;
 
 const api = {
   // Obține toate mărcile distincte din tabela 'masini'
