@@ -17,21 +17,36 @@ const Home = () => {
   const [selectedGeneration, setSelectedGeneration] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('');
 
-  const [showResult, setShowResult] = useState(false);
-  const [tuningData, setTuningData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   // 1. Încarcă lista de branduri unice la montare
   useEffect(() => {
     const fetchBrands = async () => {
-      const { data, error } = await supabase
-        .from('masini')
-        .select('brand')
-        .order('brand');
-      if (error) console.error(error);
-      else {
-        const uniqueBrands = [...new Map(data.map(item => [item.brand, item.brand])).values()];
+      try {
+        const pageSize = 1000;
+        let from = 0;
+        let allRows = [];
+
+        while (true) {
+          const { data, error } = await supabase
+            .from('masini')
+            .select('brand')
+            .not('brand', 'is', null)
+            .order('brand', { ascending: true })
+            .range(from, from + pageSize - 1);
+
+          if (error) throw error;
+          if (!data || data.length === 0) break;
+
+          allRows = allRows.concat(data);
+          if (data.length < pageSize) break;
+          from += pageSize;
+        }
+
+        const uniqueBrands = [...new Set(allRows.map(item => String(item.brand || '').trim()).filter(Boolean))];
         setBrands(uniqueBrands);
+      } catch (error) {
+        console.error('Eroare la încărcarea brandurilor:', error);
       }
     };
     fetchBrands();
@@ -127,14 +142,13 @@ const Home = () => {
       // Poți calcula un câștig estimat (exemplu: +30% CP și +25% cuplu)
       const powerGain = Math.round(data.cp_stock * 0.3);
       const torqueGain = Math.round(data.cuplu_stock * 0.25);
-      setTuningData({
+      const resultData = {
         ...data,
         power_gain: powerGain,
         torque_gain: torqueGain,
         estimated_price: 2500 // sau poți calcula dinamic
-      });
-      setShowResult(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+      navigate('/rezultate', { state: { tuningData: resultData } });
     } catch (err) {
       console.error(err);
       alert('Nu am găsit date pentru combinația selectată.');
@@ -142,42 +156,6 @@ const Home = () => {
       setLoading(false);
     }
   };
-
-  const handleBack = () => {
-    setShowResult(false);
-    setTuningData(null);
-    // Opțional: resetează selecțiile
-    setSelectedBrand('');
-    setSelectedModel('');
-    setSelectedGeneration('');
-    setSelectedEngine('');
-  };
-
-  // --- Ecran cu rezultatul ---
-  if (showResult && tuningData) {
-    return (
-      <div className="home-result-container">
-        <div className="container">
-          <div className="result-card">
-            <button className="back-button" onClick={handleBack}>← Înapoi la selector</button>
-            <h2>Rezultat estimare tuning</h2>
-            <div className="result-details">
-              <p><strong>Mașina:</strong> {tuningData.brand} {tuningData.model} ({tuningData.generatie})</p>
-              <p><strong>Motorizare:</strong> {tuningData.motorizare} - {tuningData.tip_motor}</p>
-              <p><strong>Putere inițială:</strong> {tuningData.cp_stock} CP</p>
-              <p><strong>Cuplu inițial:</strong> {tuningData.cuplu_stock} Nm</p>
-              <p><strong>Câștig estimat:</strong> +{tuningData.power_gain} CP / +{tuningData.torque_gain} Nm</p>
-              <p><strong>Pachet recomandat:</strong> Stage 1</p>
-              <p><strong>Preț estimat:</strong> {tuningData.estimated_price} € + TVA</p>
-            </div>
-            <button className="btn-primary" onClick={() => window.location.href = '/contact'}>
-              Solicită ofertă personalizată
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   // --- Pagina principală cu toate secțiunile (Hero, formular, statistici, carduri, hartă) ---
   return (

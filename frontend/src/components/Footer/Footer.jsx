@@ -7,7 +7,23 @@ const Footer = () => {
     <footer className="site-footer">
       <div className="container footer-container">
         <div className="footer-brand">
-          <p>AJ Performance Tuning – ECU Remapping Specialist</p>
+          <Link to="/" className="footer-brand-logo" aria-label="AJ Tuning Home">
+            <div className="footer-logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="7" cy="17" r="2" stroke="currentColor" strokeWidth="2" />
+                <circle cx="17" cy="7" r="2" stroke="currentColor" strokeWidth="2" />
+                <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </div>
+            <div className="footer-brand-copy">
+              <span className="footer-brand-kicker">Performance Garage</span>
+              <strong className="footer-brand-name">
+                AJ <span>Tuning</span>
+              </strong>
+              <p className="footer-brand-tagline">ECU Remapping, Dyno Insight, Mechanical Precision</p>
+            </div>
+          </Link>
         </div>
         <div className="footer-links">
           <Link to="/recenzii" className="footer-link">Recenzii</Link>

@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import AboutUs from './components/Header/AboutUs';
 import Contact from './components/Header/Contact';
 import Services from './components/Header/Services';
+import Rezultate from './components/Home/Rezultate';
 // Importă componentele din folderul Footer (unde sunt deja)
 import Reviews from './components/Footer/Reviews';
 import Blog from './components/Footer/Blog';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/rezultate" element={<Rezultate />} />
           <Route path="/recenzii" element={<Reviews />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/politica" element={<Policy />} />

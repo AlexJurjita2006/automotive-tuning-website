@@ -1,9 +1,11 @@
 .site-footer {
-  background: #0a0a0a;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background:
+    radial-gradient(120% 120% at 5% 0%, rgba(220, 55, 60, 0.18), transparent 38%),
+    linear-gradient(180deg, #090b10 0%, #06070a 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 50px 0 25px;
   margin-top: 60px;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Rajdhani', 'Barlow Condensed', sans-serif;
   position: relative;
 }
 
@@ -15,16 +17,67 @@
   gap: 30px;
 }
 
-/* Brand - doar text */
-.footer-brand p {
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: -0.2px;
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin: 0;
+.footer-brand {
+  flex: 1;
+  min-width: 310px;
+}
+
+.footer-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.footer-logo-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #121a24 0%, #1f2f45 100%);
+  box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.footer-logo-icon svg {
+  width: 29px;
+  height: 29px;
+}
+
+.footer-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-brand-kicker {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.footer-brand-name {
+  font-size: 2.05rem;
+  line-height: 0.95;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.footer-brand-name span {
+  color: #ff3a45;
+}
+
+.footer-brand-tagline {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  color: rgba(221, 225, 234, 0.82);
+  letter-spacing: 0.3px;
 }
 
 /* Link-uri */
@@ -32,6 +85,7 @@
   display: flex;
   gap: 32px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer-link {
@@ -75,7 +129,7 @@
 .footer-social {
   display: flex;
   gap: 20px;
-  width: auto;
+  width: 120px;
   justify-content: flex-end;
   align-items: center;
   margin-top: 0;
@@ -109,10 +163,11 @@
   text-align: center;
   margin-top: 40px;
   padding-top: 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: #777;
-  font-size: 0.75rem;
-  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(220, 224, 232, 0.62);
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 /* Responsive: pe mobil, iconițele se vor centra (nu mai stau în dreapta) */
@@ -121,12 +176,27 @@
     flex-direction: column;
     text-align: center;
   }
+
+  .footer-brand {
+    min-width: 0;
+  }
+
+  .footer-brand-logo {
+    justify-content: center;
+  }
+
+  .footer-brand-name {
+    font-size: 1.72rem;
+  }
+
   .footer-links {
     justify-content: center;
+    gap: 20px;
   }
 
   .footer-social {
     justify-content: center;
     margin-top: 8px;
+    width: auto;
   }
 }
