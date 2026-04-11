@@ -1,23 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import { supabase } from '../../supabaseClient';
 import './Reviews.css';
 
 const Reviews = () => {
+  const REVIEWS_TABLE = 'reviews';
   const [reviews, setReviews] = useState([]);
   const [visibleCount, setVisibleCount] = useState(5);
   const [formData, setFormData] = useState({ name: '', rating: 5, comment: '' });
   const [hoverRating, setHoverRating] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
-  // Load from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem('aj_tuning_reviews');
-    if (stored) {
-      setReviews(JSON.parse(stored));
-    }
+    const fetchReviews = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from(REVIEWS_TABLE)
+          .select('id, name, rating, comment, created_at')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        const normalized = (data || []).map((item) => ({
+          id: item.id,
+          name: item.name,
+          rating: Number(item.rating),
+          comment: item.comment,
+          date: new Date(item.created_at).toLocaleDateString('ro-RO'),
+        }));
+
+        setReviews(normalized);
+      } catch (error) {
+        console.error('Eroare la încărcarea recenziilor:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('aj_tuning_reviews', JSON.stringify(reviews));
-  }, [reviews]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,18 +49,43 @@ const Reviews = () => {
     setFormData({ ...formData, rating });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.comment.trim()) return;
-    const newReview = {
-      id: Date.now(),
-      name: formData.name,
-      rating: parseInt(formData.rating),
-      comment: formData.comment,
-      date: new Date().toLocaleDateString('ro-RO'),
-    };
-    setReviews([newReview, ...reviews]);
-    setFormData({ name: '', rating: 5, comment: '' });
+    if (!formData.name.trim() || !formData.comment.trim() || submitting) return;
+
+    try {
+      setSubmitting(true);
+      const payload = {
+        name: formData.name.trim(),
+        rating: parseInt(formData.rating, 10),
+        comment: formData.comment.trim(),
+      };
+
+      const { data, error } = await supabase
+        .from(REVIEWS_TABLE)
+        .insert(payload)
+        .select('id, name, rating, comment, created_at')
+        .single();
+
+      if (error) throw error;
+
+      const newReview = {
+        id: data.id,
+        name: data.name,
+        rating: Number(data.rating),
+        comment: data.comment,
+        date: new Date(data.created_at).toLocaleDateString('ro-RO'),
+      };
+
+      setReviews((prev) => [newReview, ...prev]);
+      setVisibleCount((prev) => Math.max(prev, 5));
+      setFormData({ name: '', rating: 5, comment: '' });
+    } catch (error) {
+      console.error('Eroare la salvarea recenziei:', error);
+      alert('Nu am putut salva recenzia. Verifică dacă tabela reviews și politicile RLS sunt configurate.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const loadMore = () => {
@@ -108,14 +155,18 @@ const Reviews = () => {
               rows="4"
               required
             />
-            <button type="submit" className="submit-review-btn">Trimite recenzia</button>
+            <button type="submit" className="submit-review-btn" disabled={submitting}>
+              {submitting ? 'Se salvează...' : 'Trimite recenzia'}
+            </button>
           </form>
         </div>
 
         {/* Listă recenzii */}
         <div className="reviews-list-section">
           <h2>Ultimele recenzii</h2>
-          {reviews.length === 0 ? (
+          {loading ? (
+            <p className="no-reviews">Se încarcă recenziile...</p>
+          ) : reviews.length === 0 ? (
             <p className="no-reviews">Nicio recenzie încă. Fii primul care scrie!</p>
           ) : (
             <>
@@ -141,7 +192,7 @@ const Reviews = () => {
                 ))}
               </div>
               {visibleCount < reviews.length && (
-                <button onClick={loadMore} className="load-more-btn">Afișează mai multe recenzii</button>
+                <button onClick={loadMore} className="load-more-btn">Vezi mai multe recenzii</button>
               )}
             </>
           )}
